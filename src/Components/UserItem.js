@@ -2,15 +2,16 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class UserItem extends Component {
-  chooseUser(id){
-    this.props.onChoose(id);
+  chooseUser(){
+    this.props.onChoose(this.props.user.id);
   }
 
   render() {
     return (
       <li className="User">
         <strong>{this.props.user.name}</strong>
-        <a href='#' onClick={this.chooseUser.bind(this, this.props.user.id)}>choose</a>
+        &nbsp;
+        <button onClick={this.chooseUser.bind(this)}>choose</button>
       </li>
     )
   }

@@ -34,9 +34,9 @@ class App extends Component {
     })
   }
 
-  getTodos(){
+  getTodos(user_id){
     $.ajax({
-      url: 'https://jsonplaceholder.typicode.com/users/' + this.state.user_id + '/todos',
+      url: 'https://jsonplaceholder.typicode.com/users/' + user_id + '/todos',
       dataType: 'json',
       cached: false,
       success: function(data){
@@ -74,11 +74,13 @@ class App extends Component {
     this.getProjects();
     this.getUsers();
     // TODO: why two times?
-    this.getTodos();
+    // this.getTodos();
+    console.log('will mount');
   }
 
   componentDidMount(){
-    this.getTodos();
+    this.getTodos(1);
+    console.log('did mount');
   }
 
   handleAddProject(project){
@@ -95,8 +97,8 @@ class App extends Component {
   }
 
   handleChooseUser(id){
-    this.setState({user_id: id});
-    this.getTodos();
+    // this.setState({user_id: id});
+    this.getTodos(id);
   }
 
   render() {
