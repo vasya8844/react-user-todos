@@ -9,7 +9,10 @@ class UserItem extends Component {
   render() {
     return (
       <li className="User">
-        <strong>{this.props.user.name}</strong>
+        <span
+          style={ this.props.active_user_id == this.props.user.id ? {'font-weight': 'bold'} : {'font-weight': 'normal'}}>
+          {this.props.user.name}
+        </span>
         &nbsp;
         <button onClick={this.chooseUser.bind(this)}>choose</button>
       </li>
@@ -18,7 +21,8 @@ class UserItem extends Component {
 }
 
 UserItem.propTypes = {
-  user: PropTypes.object.isRequired
+  user: PropTypes.object.isRequired,
+  active_user_id: PropTypes.number.isRequired
 }
 
 export default UserItem;
