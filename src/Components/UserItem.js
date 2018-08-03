@@ -10,7 +10,7 @@ class UserItem extends Component {
     return (
       <li className="User">
         <span
-          style={ this.props.active_user_id == this.props.user.id ? {'font-weight': 'bold'} : {'font-weight': 'normal'}}>
+          style={ {fontWeight: this.props.user.selected ? 'bold' : 'normal'}}>
           {this.props.user.name}
         </span>
         &nbsp;
@@ -22,7 +22,7 @@ class UserItem extends Component {
 
 UserItem.propTypes = {
   user: PropTypes.object.isRequired,
-  active_user_id: PropTypes.number.isRequired
+  onChoose: PropTypes.func.isRequired
 }
 
 export default UserItem;

@@ -21,6 +21,7 @@ class App extends Component {
       dataType: 'json',
       cached: false,
       success: function(data){
+        data[0].selected = true;
         this.setState({users: data}, function() {
           console.log(this.state);
         });
@@ -29,6 +30,12 @@ class App extends Component {
         console.log(err);
       }
     })
+  }
+
+  handleChooseUser(user_id){
+    let users = this.state.users;
+    users.forEach(user => user.selected = user.id === user_id);
+    this.setState({users: users});
   }
 
   getProjects(){
@@ -77,7 +84,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <Users users={this.state.users} />
+        <Users onChoose={this.handleChooseUser.bind(this)}
+          users={this.state.users} />
         <hr />
         <hr />
         <AddProject addProject={this.handleAddProject.bind(this)} />

@@ -3,6 +3,10 @@ import TodoItem from './TodoItem';
 import PropTypes from 'prop-types';
 
 class Todos extends Component {
+  componentWillMount(){
+    console.log('will mount todos');
+  }
+
   render() {
     let todoItems;
     if (this.props.todos){

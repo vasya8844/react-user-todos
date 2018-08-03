@@ -8,8 +8,7 @@ class Users extends Component {
   constructor(){
     super()
     this.state = {
-      todos: [],
-      active_user_id: 1
+      todos: []
     }
   }
 
@@ -29,27 +28,30 @@ class Users extends Component {
     })
   }
 
-  componentWillMount(){
-    this.getTodos(1);
-  }
-
-  handleChooseUser(user_id){
-    this.setState({active_user_id: user_id});
-    this.getTodos(user_id);
-  }
-
   chooseUser(id){
     this.props.onChoose(id);
+    this.getTodos(id);
+  }
+
+  componentDidUpdate(){
+    console.log('user componentDidUpdate', this.props.users);
+    // let selected_user_id = this.props.users.find(user => user.selected).id;
+    // this.getTodos(selected_user_id);
+
+  }
+
+  componentWillMount(){
+    console.log('componentWillMount', this.props.users);
   }
 
   render() {
     let items;
+    console.log('render users', this.props.users);
     if (this.props.users){
       items = this.props.users.map(user => {
         return (
-          <UserItem onChoose={this.handleChooseUser.bind(this)}
-            key={user.id} user={user}
-            active_user_id={this.state.active_user_id} />
+          <UserItem onChoose={this.chooseUser.bind(this)}
+            key={user.id} user={user} />
         );
       });
     }

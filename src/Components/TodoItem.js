@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class TodoItem extends Component {
+  componentWillMount(){
+    console.log('will mount todoItem');
+  }
+
   render() {
     return (
       <li className="Todo">
