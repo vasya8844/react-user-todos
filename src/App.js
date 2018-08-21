@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import uuid from 'uuid';
-import $ from 'jquery';
 import Projects from './Components/Projects';
 import Users from './Components/Users';
 import AddProject from './Components/AddProject';
@@ -16,20 +15,10 @@ class App extends Component {
   }
 
   getUsers(){
-    $.ajax({
-      url: 'https://jsonplaceholder.typicode.com/users',
-      dataType: 'json',
-      cached: false,
-      success: function(data){
-        data[0].selected = true;
-        this.setState({users: data}, function() {
-          console.log(this.state);
-        });
-      }.bind(this),
-      error: function(xhr, status, err){
-        console.log(err);
-      }
-    })
+    fetch('https://jsonplaceholder.typicode.com/users')
+      .then(response => response.json())
+      .then(data => this.setState({ users: data }))
+      .catch(e => console.log('error', e));
   }
 
   handleChooseUser(user_id){

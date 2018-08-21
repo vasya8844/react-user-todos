@@ -9,12 +9,15 @@ class UserItem extends Component {
   render() {
     return (
       <li className="User">
-        <span
-          style={ {fontWeight: this.props.user.selected ? 'bold' : 'normal'}}>
+        <a href="javascript:void(0)"
+          onClick={this.chooseUser.bind(this)}
+          style={
+            {fontWeight: this.props.user.selected ? 'bold' : 'normal',
+              textDecoration: 'none',
+            color: 'inherit'
+          }}>
           {this.props.user.name}
-        </span>
-        &nbsp;
-        <button onClick={this.chooseUser.bind(this)}>choose</button>
+        </a>
       </li>
     )
   }

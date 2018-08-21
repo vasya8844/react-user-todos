@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import UserItem from './UserItem';
-import $ from 'jquery';
 import Todos from './Todos';
 import PropTypes from 'prop-types';
 
@@ -13,19 +12,10 @@ class Users extends Component {
   }
 
   getTodos(user_id){
-    $.ajax({
-      url: 'https://jsonplaceholder.typicode.com/users/' + user_id + '/todos',
-      dataType: 'json',
-      cached: false,
-      success: function(data){
-        this.setState({todos: data}, function() {
-          console.log(this.state);
-        });
-      }.bind(this),
-      error: function(xhr, status, err){
-        console.log(err);
-      }
-    })
+    fetch('https://jsonplaceholder.typicode.com/users/' + user_id + '/todos')
+      .then(response => response.json())
+      .then(data => this.setState({ todos: data }))
+      .catch(e => console.log('error', e));
   }
 
   chooseUser(id){
